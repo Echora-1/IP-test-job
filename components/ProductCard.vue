@@ -1,14 +1,17 @@
 <template>
   <div class="product-card" tabindex="0">
-    <div class="product-card__delete-button" @click="() => removeProduct(product.id)"></div>
-    <img src="../assets/img.png" width="100%" height="200" alt="">
+    <button class="product-card__delete-button" @click="() => removeProduct(product.id)" />
+    <img :src="product ? product.image: ''" width="100%" height="200" :alt="product ? product.name : ''">
     <div class="product-card__info">
-      <p class="product-card__name">{{ product ? product.name : 'Наименование товара' }}</p>
-      <p class="product-card__description">{{
-          product ? product.description :
-          'Довольно - таки интересное описание товара в несколько строк.Довольно - таки интересное описание товара в несколько строк'
-        }}</p>
-      <p class="product-card__price">{{ product ? product.price : '10 000 руб.' }}</p>
+      <p class="product-card__name">
+        {{ product ? product.name : '' }}
+      </p>
+      <p class="product-card__description">
+        {{ product ? product.description : '' }}
+      </p>
+      <p class="product-card__price">
+        {{ product ? product.price : '' }} руб.
+      </p>
     </div>
   </div>
 </template>
@@ -39,10 +42,16 @@ export default {
   &:hover {
     transform: scale(1.02);
   }
+  img {
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+  }
 
   &__delete-button {
     position: absolute;
+    border: none;
     display: none;
+    cursor: pointer;
     top: -8px;
     right: -8px;
     background-color: #FF8484;
@@ -50,10 +59,19 @@ export default {
     border-radius: 10px;
     height: 32px;
     width: 32px;
-    background-image: url("../assets/delete.png");
+    background-image: url("../assets/img/delete.png");
     background-repeat: no-repeat;
     background-position: center;
+    &:hover {
+      background-color: #ff5353;
+    }
     .product-card:hover & {
+      display: block;
+    }
+    .product-card:focus & {
+      display: block;
+    }
+    .product-card:focus-within & {
       display: block;
     }
   }
@@ -62,29 +80,33 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 16px 16px 24px;
-    & p {
-      font-family: 'Source Sans Pro', sans-serif;
+    p {
       margin-top: 0;
       color: #3F3F3F;
       max-width: 300px;
     }
   }
-
+  &__name,
+  &__description,
+  &__price
+   {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   &__name {
     font-weight: 600;
     font-size: 20px;
     line-height: 25px;
     margin-bottom: 16px;
+    height: 25px;
   }
 
   &__description {
     font-size: 16px;
     line-height: 20px;
     height: 80px;
-    overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
     -webkit-line-clamp: 4;
     margin-bottom: 32px;
   }
@@ -94,6 +116,7 @@ export default {
     font-size: 24px;
     line-height: 30px;
     margin-bottom: 0;
+    height: 30px;
   }
 }
 

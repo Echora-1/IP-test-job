@@ -108,12 +108,15 @@ export default {
   border-radius: 4px;
   width: 100%;
   margin: 4px 0;
-  & textarea {
+  &:hover{
+    border-color: #B4B4B4;
+  }
+  textarea {
     height: auto;
     resize: none;
   }
   &--focused {
-    border-color: gray;
+    border-color: #545454;
   }
   &--invalid {
     border-color: #FF8484;
@@ -138,7 +141,6 @@ export default {
 }
 
 .base-label {
-  font-family: 'Source Sans Pro', sans-serif;
   color: #49485E;
   font-size: 10px;
   line-height: 13px;
@@ -161,9 +163,8 @@ export default {
 
 .invalid-text {
   min-height: 10px;
-  & p {
+  p {
     margin: 0;
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 8px;
     line-height: 10px;
     letter-spacing: -0.02em;
