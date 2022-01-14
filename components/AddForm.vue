@@ -2,7 +2,9 @@
   <div ref="addForm" class="add-form">
     <div :class="['success-message', {'success-message--show': isShowSuccessMessage}]">
       <p>Товар удачно добавлен</p>
-      <button @click="closeSuccessMessage">Хорошо</button>
+      <button @click="closeSuccessMessage">
+        Хорошо
+      </button>
     </div>
     <BaseInput
       id="name"
@@ -110,7 +112,11 @@ export default {
     },
     changeFieldValue (field, value) {
       this.isFormDirty = true
-      field.value = value
+      if (field === this.fields.price) {
+        field.value = this.formatPrice(value)
+      } else {
+        field.value = value
+      }
     },
     validateAllFields () {
       Object.entries(this.fields).forEach(([_, field]) => this.validateField(field))
