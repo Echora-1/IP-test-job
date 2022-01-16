@@ -49,8 +49,6 @@ export default {
   mounted () {
     if (localStorage.getItem('productList') != null) {
       this.setList(JSON.parse(localStorage.getItem('productList')))
-    } else {
-      this.setList([])
     }
   },
   methods: {
@@ -80,7 +78,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 16px 8px 0;
+  padding: 32px 16px 0 0;
   flex: 0 0 100%;
   max-width: 100%;
   @media (max-width: 950px){
@@ -102,9 +100,9 @@ export default {
 
 .sidebar {
   width: 332px;
-  padding-top: 8px;
+  padding-top: 10px;
   position: relative;
-  min-height: calc(100vh - 75px);
+  min-height: calc(100vh - 108px);
   @media (max-width: 767px){
     width: 280px;
   }
@@ -134,10 +132,11 @@ export default {
   flex: 0 0 calc(100% - 332px);
   width: 100%;
   max-width: calc(100% - 332px);
-  padding: 0 0 30px 16px;
+  padding: 10px 0 16px 16px;
   display: flex;
   flex-wrap: wrap;
-  min-height: calc(100vh - 75px);
+  min-height: calc(100vh - 92px);
+  overflow: hidden;
   @media (max-width: 767px){
     flex: 0 0 calc(100% - 280px);
     max-width: calc(100% - 280px);

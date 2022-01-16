@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div v-click-outside="hideDropdown" class="wrapper">
     <label :for="id" class="base-label">
       {{ label }}
     </label>
@@ -39,7 +39,13 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside'
+
 export default {
+
+  directives: {
+    ClickOutside
+  },
   props: {
     value: {
       type: String,
@@ -123,7 +129,6 @@ export default {
   border: 1px solid transparent;
   border-radius: 4px;
   width: 100%;
-  margin-top: 8px;
   &:hover{
     border-color: #B4B4B4;
   }
@@ -161,13 +166,13 @@ export default {
 .list-selector___dropdown {
   max-height: 100px;
   width: -webkit-fill-available;
-  overflow-y: scroll;
   position: absolute;
   background-color: white;
   border: 1px solid #545454;
   border-radius: 4px;
   margin-top: 2px;
   z-index: 1;
+  overflow-y: auto;
   ul {
     list-style: none;
     margin: 0;
