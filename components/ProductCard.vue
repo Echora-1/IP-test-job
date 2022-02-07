@@ -1,30 +1,42 @@
-<template>
-  <div class="product-card" tabindex="0">
-    <button class="product-card__delete-button" @click="() => removeProduct(product.id)" />
-    <img :src="product ? product.image: ''" width="100%" height="200" :alt="product ? product.name : ''">
-    <div class="product-card__info">
-      <p class="product-card__name">
-        {{ product ? product.name : '' }}
-      </p>
-      <p class="product-card__description">
-        {{ product ? product.description : '' }}
-      </p>
-      <p class="product-card__price">
-        {{ product ? product.price : '' }} руб.
-      </p>
-    </div>
-  </div>
-</template>
-
 <script>
-import { mapActions } from 'vuex'
-
 export default {
-  props: ['product'],
-  methods: {
-    ...mapActions({ removeProduct: 'removeProduct' })
+  functional: true,
+  props: {
+    product: {
+      type: Object,
+      default() {
+        return {
+          image: '',
+          name: '',
+          description: '',
+          price: ''
+        }
+      }
+    },
+    removeCard: {
+      type: Function
+    }
+  },
+  render: function (h, context) {
+    return (
+      <div class="product-card" tabIndex="0">
+        <button class="product-card__delete-button" on-click={() => context.props.removeCard(context.props.product.id)}/>
+        <img src={context.props.product.image} width="100%" height="200" alt={context.props.product.name} />
+        <div class="product-card__info">
+          <p class="product-card__name">
+            {context.props.product.name}
+          </p>
+          <p class="product-card__description">
+            {context.props.product.description}
+          </p>
+          <p class="product-card__price">
+            {context.props.product.price} руб.
+          </p>
+        </div>
+      </div>
+      )
+    }
   }
-}
 </script>
 
 <style scoped lang="scss">
@@ -45,6 +57,8 @@ export default {
   img {
     border-radius: 4px 4px 0 0;
     overflow: hidden;
+    object-fit: cover;
+    max-width: 100%;
   }
 
   &__delete-button {

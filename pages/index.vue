@@ -9,8 +9,8 @@
         <AddForm />
       </div>
       <transition-group name="list" tag="div" :class="['product-list', {'product-list--empty': !getProductsList.length}]">
-        <div v-for="(product, index) in getProductsList" :key="index">
-          <ProductCard :product="product" />
+        <div v-for="product in getProductsList" :key="product.id">
+          <ProductCard :product="product" :remove-card="removeProduct"/>
         </div>
       </transition-group>
     </div>
@@ -52,7 +52,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ sortProductsListMin: 'sortProductsListMin', sortProductsListMax: 'sortProductsListMax', sortProductsListName: 'sortProductsListName', setList: 'setList' }),
+    ...mapActions({ sortProductsListMin: 'sortProductsListMin', sortProductsListMax: 'sortProductsListMax', sortProductsListName: 'sortProductsListName', setList: 'setList', removeProduct: 'removeProduct'  }),
     selectSort (value) {
       this.sort = value.value
     }

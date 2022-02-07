@@ -1,6 +1,6 @@
-const state = {
+const state = () => ({
   productsList: []
-}
+})
 
 const getters = {
   getProductsList: state => state.productsList

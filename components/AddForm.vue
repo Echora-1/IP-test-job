@@ -58,7 +58,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import BaseInput from '../components/BaseInput'
+import BaseInput from './BaseInput.vue'
 
 export default {
   components: { BaseInput },
@@ -98,9 +98,7 @@ export default {
     addProduct () {
       this.validateAllFields()
 
-      const isFormValid = Object.values(this.fields).every((item) => {
-        return item.isValid
-      })
+      const isFormValid = Object.values(this.fields).every((item) => item.isValid)
       if (isFormValid) {
         this.setProduct({
           id: `${this.fields.name.value}+${Math.random().toFixed(4)}`,
@@ -132,17 +130,17 @@ export default {
       const formatValue = value.replace(/\s/g, '')
       if (formatValue.length === 3) {
         return formatValue
-      } else if (formatValue.length === 4) {
+      } if (formatValue.length === 4) {
         return `${formatValue[0]} ${formatValue.slice(1)}`
-      } else if (formatValue.length === 5) {
+      } if (formatValue.length === 5) {
         return `${formatValue[0]}${formatValue[1]} ${formatValue.slice(2)}`
-      } else if (formatValue.length === 6) {
+      } if (formatValue.length === 6) {
         return `${formatValue[0]}${formatValue[1]}${formatValue[2]} ${formatValue.slice(3)}`
-      } else if (formatValue.length === 7) {
+      } if (formatValue.length === 7) {
         return `${formatValue[0]} ${formatValue[1]}${formatValue[2]}${formatValue[3]} ${formatValue.slice(4, 7)}`
-      } else {
-        return value
       }
+        return value
+
     },
     closeSuccessMessage () {
       this.isShowSuccessMessage = false
